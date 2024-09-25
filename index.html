@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Projects</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="CSS/CSS_Main_Page.css">
+    <title>Hovedside</title>
+    <link rel="icon" type="image/x-icon" href="Icons/favicon.ico">
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to My Portfolio</h1>
-        <p>Explore my projects below!</p>
-    </header>
+  <!-- The navigation bar, for main pages-->
+  <div class="navbar">
+    <a href="Main_Page.html">Hovedside</a>
+    <a href="Publications_Page.html">Publikasjoner</a>
+    <a href="Projects_Page.html">Prosjekter</a>
+    <a href="About_Me_page.html">Om meg</a>
+    <div class="dropdown">
+      <button class="dropbtn">More ▼
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="dropdowns/dropdown_page_1.html">Link 1</a>
+        <a href="dropdowns/dropdown_page_2.html">Link 2</a>
+        <a href="dropdowns/dropdown_page_3.html">Link 3</a>
+      </div>
+    </div>
+  </div>
+  <!-- The main content-->
+  <!-- I want to add divs that will encompass the left, center and right side of the screen-->
+  <div class="content">
+    <div class = "left"></div>
+    <div class = "center">
+      <h1>Velkommen til min hjemmeside!</h1>
+      <!--img src="Icons/WIN_2.jpg" alt="Bilde lastet ikke inn" width="200" height="200" title="Bilde av meg!"-->
 
-    <main>
-        <section id="projects">
-            <div class="project-card">
-                <h2>Project 1</h2>
-                <p>A brief description of the project.</p>
-                <button onclick="showProjectDetails('Project 1')">View Details</button>
-            </div>
-            <div class="project-card">
-                <h2>Project 2</h2>
-                <p>A brief description of the project.</p>
-                <button onclick="showProjectDetails('Project 2')">View Details</button>
-            </div>
-            <div class="project-card">
-                <h2>Project 3</h2>
-                <p>A brief description of the project.</p>
-                <button onclick="showProjectDetails('Project 3')">View Details</button>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>Check out my <a href="your-cv-link-here">CV</a></p>
-    </footer>
-
-    <script src="script.js"></script>
+  </div>
+  <div class = "right"></div>
+</div>
 </body>
-</html>
+
+
+</html>    
