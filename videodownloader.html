@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TermoPy Project</title>
+    <title>VideoDownloader Project</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>TermoPy</h1>
+        <h1>VideoDownloader</h1>
         <nav>
             <a href="index.html">Back to Main Page</a>
         </nav>
@@ -17,22 +17,44 @@
 
     <section class="section">
         <h2>Overview</h2>
-        <p>TermoPy is a Python library for simulating thermodynamic processes inside heat engines. It offers flexible tools to model cycles, plot graphs, and calculate efficiency.</p>
-        
-        <h2>Features</h2>
-        <ul>
-            <li>Simulates various heat engine cycles (e.g., Carnot, Rankine)</li>
-            <li>Calculates thermal efficiency</li>
-            <li>Plots PV and TS diagrams</li>
-        </ul>
-        
-        <h2>Installation & Usage</h2>
-        <p>To install the library, use pip:</p>
-        <pre><code>pip install termopy</code></pre>
-    </section>
+        <p>VideoDownloader is a versatile Discord bot that allows users to download media from YouTube and Twitter, with options to convert formats or extract specific subclips as GIFs.</p>
 
-    <footer>
-        <p>&copy; 2024 [Your Name]. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+        <h2>How to Add the Bot</h2>
+        <p>To add the bot to your Discord server, click the link below:</p>
+        <a href="https://discord.com/oauth2/authorize?client_id=1252695861432156362&permissions=292057840640&integration_type=0&scope=bot" target="_blank" class="btn">Add Bot to Server</a>
+
+        <h2>Bot Commands</h2>
+        <h3>1. `!ping`</h3>
+        <p><strong>Description</strong>: Use this command to check if the bot is responsive.</p>
+        <p><strong>Response</strong>: The bot will reply with "Pong!" to confirm it's working.</p>
+
+        <h3>2. `!download &lt;url&gt; [format] [tStart] [tEnd]`</h3>
+        <p><strong>Description</strong>: This command downloads media from a specified URL. Currently, only YouTube and Twitter videos are supported.</p>
+        <p><strong>Usage</strong>:</p>
+        <ul>
+            <li><code>&lt;url&gt;</code>: The URL of the video to download.</li>
+            <li><code>[format]</code>: (Optional) The desired format for the downloaded media. Default is <code>mp4</code>. Supported formats are:
+                <ul>
+                    <li>mp4</li>
+                    <li>mp3</li>
+                    <li>mkv</li>
+                    <li>wav</li>
+                    <li>mpeg</li>
+                    <li>gif</li>
+                </ul>
+            </li>
+            <li><code>[tStart]</code> and <code>[tEnd]</code>: (Optional) Time range for creating a GIF, specified in seconds.</li>
+        </ul>
+        <h4>Examples:</h4>
+        <ul>
+            <li>Download a YouTube video in MP4 format:
+                <pre><code>!download https://www.youtube.com/watch?v=example</code></pre>
+            </li>
+            <li>Download a Twitter video in MP3 format:
+                <pre><code>!download https://twitter.com/example/status/example mp3</code></pre>
+            </li>
+            <li>Download a YouTube video and convert it to a GIF from 10 to 20 seconds:
+                <pre><code>!download https://www.youtube.com/watch?v=example gif 10 20</code></pre>
+            </li>
+        </ul>
+        <p><strong>Response</strong>: The bot will download the specified media and send the file in the channel.</p>

@@ -61,3 +61,24 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
+.about-container {
+    display: flex;
+    flex-direction: column; /* Stack the image and text vertically */
+    align-items: center;    /* Horizontally centers the image and text */
+    text-align: center;     /* Centers the text within the container */
+    gap: 20px;              /* Adds space between the image and the text */
+    padding: 20px;
+}
+
+.profile-photo {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;     /* Makes the image circular */
+    object-fit: cover;      /* Ensures the image covers the entire circle */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a slight shadow */
+}
+
+.about-container p {
+    flex: 1; /* Ensures the text takes up the remaining space */
+}

@@ -2,7 +2,7 @@ const projects = [
     {
         title: "TermoPy",
         description: "A Python library for simulating thermodynamic processes inside heat engines.",
-        link: "termopy.html"
+        link: "https://github.com/Tycho887/TermoPy/blob/master/introduction.ipynb"
     },
     {
         title: "VideoDownloader",
@@ -11,8 +11,13 @@ const projects = [
     },
     {
         title: "AI Diary",
-        description: "An interactive diary that analyzes your mood and recommends activities.",
-        link: "aidiary.html"
+        description: "An interactive diary that analyzes your mood and recommends activities using the OpenAI API.",
+        link: "https://github.com/Tycho887/CheckerBot/tree/main"
+    },
+    {
+        title: "Oil spill simulation",
+        description: "Fluid simulation of oil interaction with water over time with vectorised Python.",
+        link: "https://gitlab.com/inf203-group-5/inf203-alpha"
     }
 ];
 
