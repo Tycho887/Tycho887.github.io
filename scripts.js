@@ -27,7 +27,7 @@ const projects = [
     {
         title: "CleanerZilla",
         description: "Script for organizing downloads folder",
-        link: ""
+        link: "https://github.com/Tycho887/CleanerZilla"
     }
 ];
 
