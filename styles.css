@@ -1,58 +1,62 @@
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
 }
 
 header {
     background-color: #333;
-    color: white;
-    padding: 10px 0;
+    color: #fff;
+    padding: 1rem;
     text-align: center;
 }
 
-h1 {
-    margin: 0;
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
 }
 
-main {
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.section {
+    padding: 2rem;
+    text-align: center;
+}
+
+#projects-list {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 20px;
+    gap: 2rem;
 }
 
 .project-card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin: 10px;
-    padding: 20px;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.project-card h2 {
-    color: #333;
-}
-
-.project-card button {
-    background-color: #008cba;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
 }
 
 footer {
-    text-align: center;
-    padding: 20px;
     background-color: #333;
-    color: white;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
     position: fixed;
     width: 100%;
     bottom: 0;
