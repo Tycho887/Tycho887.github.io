@@ -18,6 +18,16 @@ const projects = [
         title: "Oil spill simulation",
         description: "Fluid simulation of oil interaction with water over time with vectorised Python.",
         link: "https://gitlab.com/inf203-group-5/inf203-alpha"
+    },
+    {
+        title: "Measuring efficency of argon heat pumps",
+        description: "Experimental measurement of efficiency difference caused by choice of working gas in a stirling type heat pump",
+        link: "argonheatpump.html"
+    },
+    {
+        title: "CleanerZilla",
+        description: "Script for organizing downloads folder",
+        link: ""
     }
 ];
 
