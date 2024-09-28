@@ -28,7 +28,12 @@ const projects = [
         title: "CleanerZilla",
         description: "Script for organizing downloads folder",
         link: "https://github.com/Tycho887/CleanerZilla"
-    }
+    },
+    {
+        title: "Measuring the radioactivity of strontium-90",
+        description: "Description of a lab experiment measuring the radioactivity of strontium-90",
+        link: "radioactivity_strontium.html"
+    },
 ];
 
 function loadProjects() {

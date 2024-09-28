@@ -82,3 +82,20 @@ footer {
 .about-container p {
     flex: 1; /* Ensures the text takes up the remaining space */
 }
+
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+    }
+
+    .profile-photo {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* We want to center all tables */
+
+table {
+    margin: 0 auto;
+}

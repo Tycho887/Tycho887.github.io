@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Measuring Radioactivity with Geiger-Müller Counter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Radioactivity Measurement of 90Sr</h1>
+        <nav>
+            <a href="index.html">Back to Main Page</a>
+        </nav>
+    </header>
+
+    <section class="section">
+        <h2>Overview</h2>
+        <p>This experiment aimed to measure the radiation from a <sup>90</sup>Sr (strontium-90) source using a Geiger-Müller counter. The main goal was to analyze the spread of radiation and describe the measurements using statistical methods such as Poisson distribution and normal distribution. Our findings showed that background radiation is best described using a Poisson distribution, while total radiation from the source fits a normal distribution model. The radiation emitted by the <sup>90</sup>Sr source was calculated to be approximately 3900 ± 200 counts.</p>
+    </section>
+
+    <section class="section">
+        <h2>Theory</h2>
+        <p>The experiment focused on measuring alpha radiation, which is emitted by the decay of an unstable nucleus, in this case, from a <sup>90</sup>Sr source. Alpha particles consist of two protons and two neutrons and are highly energetic but can be easily blocked by most materials due to their size and inability to penetrate deeply.</p>
+        <p>Geiger-Müller counters are designed to detect ionizing radiation, such as alpha particles. The counter consists of a tube filled with gas and electrodes that create an electric field. When ionizing radiation enters the tube, it ionizes the gas, and this ionization results in a measurable electrical pulse, which can then be counted.</p>
+        <p>In this experiment, both background radiation and the radiation from the <sup>90</sup>Sr source were measured. Background radiation typically comes from natural sources such as cosmic rays, radon gas, and radioactive materials in the environment. The average background radiation level in Norway is about 3 mSv (millisieverts) per year, with radon gas being a significant contributor.</p>
+        <p>The statistical analysis involved fitting the radiation data to Poisson and normal distributions, as described by the equations used in the report. The Poisson distribution is particularly useful for modeling random events like radiation counts.</p>
+    </section>
+
+    <section class="section">
+        <h2>Experiment</h2>
+        <p>The experiment was carried out using a Fredriksen 51610 Geiger-Müller counter and a Fredriksen 5125.15 Geiger-Müller tube, which were connected to a sensor and a computer for data logging. The Geiger-Müller tube was mounted on a stand, and measurements were taken over two phases:</p>
+        <ul>
+            <li>Phase 1: 200 background radiation measurements were taken over 10-second intervals.</li>
+            <li>Phase 2: 200 measurements were taken over 10-second intervals with the sensor attached to the <sup>90</sup>Sr source.</li>
+        </ul>
+        <p>To isolate the radiation emitted by the <sup>90</sup>Sr source, the background radiation was subtracted from the total measurements. The statistical uncertainty of the measurements was calculated using the following formula:</p>
+        <p><strong>σ<sub>total</sub> = √(σ<sub>total</sub><sup>2</sup> + σ<sub>background</sub><sup>2</sup>)</strong></p>
+        <p>Afterward, a chi-square test was performed to assess whether the background radiation data followed a Poisson distribution. The data were grouped into categories based on the number of counts per interval, and a chi-square value was calculated to determine the fit.</p>
+    </section>
+
+    <section class="section">
+        <h2>Results</h2>
+        <p>The results of the experiment are shown in the following table:</p>
+        <table>
+            <tr>
+                <th>Measurement</th>
+                <th>Mean (ν̄)</th>
+                <th>Standard Deviation (σ)</th>
+            </tr>
+            <tr>
+                <td>Background Radiation</td>
+                <td>4 ± 2</td>
+                <td>2.0 ± 0.1 (Poisson)</td>
+            </tr>
+            <tr>
+                <td>Total Radiation (Background + 90Sr)</td>
+                <td>3900 ± 200</td>
+                <td>49 ± 2 (Normal)</td>
+            </tr>
+        </table>
+        <p>The radiation from the <sup>90</sup>Sr source was determined to be approximately 3900 ± 200 counts, after accounting for background radiation. The background radiation data fit a Poisson distribution, with a chi-square value (χ<sup>2</sup>) of 1.24 and a p-value between 0.24 and 0.27, confirming that we cannot reject the null hypothesis that background radiation follows a Poisson distribution.</p>
+    </section>
+
+    <section class="section">
+        <h2>Discussion</h2>
+        <p>From the statistical analysis, the background radiation data fit a Poisson distribution quite well, while the total radiation data, including the <sup>90</sup>Sr source, fit a normal distribution. However, several sources of error could have affected the results:</p>
+        <ul>
+            <li>The limited opening of the Geiger-Müller tube could have resulted in some variance in the recorded counts as the detection area may not have been perfectly aligned during all measurements.</li>
+            <li>Variability in the setup during the experiment may have caused inconsistencies in the readings, particularly when measuring radiation from the <sup>90</sup>Sr source.</li>
+            <li>The relatively low number of measurements (200 per phase) could have increased the uncertainty of the statistical analysis.</li>
+        </ul>
+        <p>Further experiments with a larger data set could help improve the accuracy of the analysis and provide a clearer understanding of the radiation distribution from the <sup>90</sup>Sr source.</p>
+    </section>
+
+    <section class="section">
+        <h2>Conclusion</h2>
+        <p>Through this experiment, we were able to measure and describe the spread of radiation from a <sup>90</sup>Sr source using statistical methods. The background radiation was best modeled by a Poisson distribution, while the total radiation from the source was described by a normal distribution. The radiation from the source was found to be approximately 3900 ± 200 counts, with background radiation playing a minimal role in the overall results.</p>
+    </section>
+
+    <footer>
+        <p>For more information, refer to the full report or the data analysis scripts used during the experiment.</p>
+    </footer>
+</body>
+</html>
