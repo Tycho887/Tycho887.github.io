@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Oil Spill Simulation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Simulation of an Oil Spill</h1>
+        <nav>
+            <a href="index.html">Back to Main Page</a>
+        </nav>
+    </header>
+
+    <section class="section">
+        <h2>Overview</h2>
+        <p>This project, as part of INF203 - Advanced Programming at NMBU, focuses on simulating the impact of an oil spill on the fishing grounds near Bay City. The simulation helps model the spread of oil over time, based on an initial oil distribution and a pre-defined flow field. The primary objective is to understand how the oil spreads, identify areas at risk, and determine potential mitigation strategies for Bay City's fishing industry.</p>
+
+        <h2>Theory</h2>
+        <p>The simulation uses a numerical model that divides the area of interest into small triangular cells, creating a mesh to represent the domain. At the initial time step (<em>t = 0</em>), the oil distribution is defined by the function <em>u(x)</em>, which describes the concentration of oil at different locations. A velocity field <em>v(x)</em> controls the movement of the oil, pushing it across the domain.</p>
+        <p>Oil flow between cells is determined by a flux formula that calculates the amount of oil transferred across shared edges between neighboring cells. Each cell’s oil content is updated over time according to the flux and the properties of the cells, such as area and normal vectors at each edge. This iterative process allows for continuous updates of the oil distribution, with boundary conditions applied to ensure the simulation respects real-world physical constraints like coastlines.</p>
+
+        <h2>Vectorized Processing</h2>
+        <p>To optimize performance, the simulation implements vector processing techniques. Instead of performing oil flow calculations one cell at a time, we used the <strong>NumPy</strong> library to vectorize the computations. By storing oil content and cell attributes (like dot products and area constants) in large arrays, we can apply operations across entire vectors at once. This dramatically reduced the computational time, improving the runtime efficiency by over 10,000% compared to an object-oriented approach. With the vectorized solver, a simulation that previously took minutes to compute was reduced to just a few seconds.</p>
+        <p>Figure 1 shows a comparison between the computation times of the object-oriented and vectorized solvers:</p>
+        <img src="images/compare.png" alt="Comparison of Object-Oriented vs Vectorized Solver" class="plot-image" style="max-height: 900px; max-width: 900px;">
+        <p><em>Figure 1: The vectorized solver significantly reduces computation time compared to the object-oriented approach, especially for large simulations with multiple iterations.</em></p>
+
+        <h2>Multiprocessing for Video Generation</h2>
+        <p>In addition to vectorization, we implemented multiprocessing to speed up video generation from the simulation results. Given the large number of frames involved in visualizing oil distribution over time, creating the video could become a bottleneck. By utilizing all available CPU cores, we significantly reduced the time required to generate the video output, ensuring that the slowest part of the process was optimized for performance.</p>
+        <p>Figure 2 illustrates the execution time for different components of the simulation, including the time required for video generation:</p>
+        <img src="images/simulation_performance.png" alt="Simulation Performance Breakdown" class="plot-image" style="max-height: 900px; max-width: 900px;">
+        <p><em>Figure 2: Execution times for various components of the simulation. Video generation times were significantly reduced by using multiprocessing.</em></p>
+
+        <h2>Experiment Setup</h2>
+        <p>The simulation was initialized with an oil distribution centered at <em>x = (0.35, 0.45)</em> and a given flow field that mimics ocean currents. We ran 2000 iterations with a fixed time step size (<em>Δt</em>), monitoring the amount of oil in a defined fishing area over time. Figure 3 below shows the oil content in the fishing area as a function of time:</p>
+        <img src="images/oil_content.png" alt="Oil Content in Fishing Area" class="plot-image" style="max-height: 900px; max-width: 900px;">
+        <p><em>Figure 3: Oil content in the fishing area over time, showing an initial peak followed by a gradual stabilization.</em></p>
+
+        <h2>Results</h2>
+        <p>As seen in Figure 3, the simulation revealed an initial peak in oil content at <em>t = 0.75</em>, followed by a gradual decline. However, one key observation was that the oil content never fully reaches zero, suggesting a persistent source of oil in the system. This issue was traced back to a bug in the interaction between certain types of cells, particularly at the boundaries, where oil retained by line and vertex cells continued to influence the surrounding triangles. This bug mirrors some real-world scenarios, where oil can accumulate along coastal boundaries, though it needs to be addressed for longer-term simulations.</p>
+        <p>Despite this, the simulation provided valuable insights into the spread of oil and the time it takes for the fishing area to experience peak contamination. Further refinement of the model could improve long-term accuracy, especially in larger simulations.</p>
+
+        <h2>Conclusions</h2>
+        <p>The oil spill simulation successfully modeled the dynamics of oil spread in the fishing area, using vectorized computations and multiprocessing to optimize performance. The results were consistent with theoretical predictions, but some bugs need to be addressed to ensure accuracy over longer time frames. The use of vectorization and parallel processing not only sped up computations significantly but also demonstrated the importance of these techniques in handling complex simulations efficiently.</p>
+        <p>Future work will focus on refining the handling of boundary conditions and improving the realism of long-term simulations. By addressing these issues, we can enhance the predictive power of the simulation and better inform efforts to protect coastal environments from oil spills.</p>
+    </section>
+
+    <footer>
+        <p>Project by Haakon Berger & Michael Ruben Johansen | Norwegian University of Life Sciences (NMBU), June 2024</p>
+    </footer>
+</body>
+</html>
+
+    
+    <footer>
+        <p>Project by Haakon Berger & Michael Ruben Johansen | Norwegian University of Life Sciences (NMBU), June 2024</p>
+    </footer>
