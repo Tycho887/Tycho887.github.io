@@ -52,6 +52,22 @@ nav ul li a {
     width: 300px;
 }
 
+/* Add cards for classes as well */
+
+#classes-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.class-card {
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
 footer {
     background-color: #333;
     color: #fff;
