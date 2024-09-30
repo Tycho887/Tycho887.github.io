@@ -50,7 +50,7 @@ const classes = [
     {
         title: "INF203 - Simulation and modeling project",
         description: "Project course where we built a fluid simulation of oil spills using Python.",
-        link: "https://www.nmbu.no/emne/in203"
+        link: "https://www.nmbu.no/emne/inf203"
     },
     {
         title: "INF221 - Algorithms and data structures",
