@@ -1,0 +1,9 @@
+EMPLOYMENT CONTRACT
+Employer: Tech Solutions Inc.
+Employee: The User
+Start Date: March 1, 2026
+
+Terms:
+1. The employee will work as a Senior Developer.
+2. Monthly salary: 55,000 DKK.
+3. Termination notice: Current month + 1 month.

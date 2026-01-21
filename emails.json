@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "sender": "Skattestyrelsen",
+    "subject": "Årsopgørelse 2025",
+    "date": "2026-01-15",
+    "content": "Kære borger,\n\nDin årsopgørelse for 2025 er nu klar til gennemsyn. Du kan se alle detaljer på vores hjemmeside.\n\nVigtige datoer:\n- Frist for ændringer: 1. maj 2026\n- Udbetaling af overskydende skat: 15. april 2026\n\nHusk at tjekke dine oplysninger grundigt.\n\nMed venlig hilsen,\nSkattestyrelsen",
+    "important": true,
+    "unread": true
+  },
+  {
+    "id": 2,
+    "sender": "Copenhagen Municipality",
+    "subject": "Water Bill - January 2026",
+    "date": "2026-01-12",
+    "content": "Dear Resident,\n\nYour water bill for January 2026 is ready.\n\nConsumption: 15.3 m³\nAmount due: 487 DKK\nPayment deadline: February 1, 2026\n\nPlease ensure payment is made before the deadline to avoid late fees.\n\nBest regards,\nCopenhagen Water Services",
+    "important": false,
+    "unread": true
+  },
+  {
+    "id": 3,
+    "sender": "Bundesagentur für Arbeit",
+    "subject": "Bescheid über Arbeitslosengeld",
+    "date": "2026-01-10",
+    "content": "Sehr geehrte Damen und Herren,\n\nIhr Antrag auf Arbeitslosengeld wurde geprüft und bewilligt.\n\nBewilligungszeitraum: 01.02.2026 - 31.07.2026\nMonatlicher Betrag: 1.850 EUR\n\nDie erste Zahlung erfolgt am 5. Februar 2026.\n\nBitte melden Sie sich regelmäßig bei Ihrer zuständigen Agentur.\n\nMit freundlichen Grüßen,\nBundesagentur für Arbeit",
+    "important": true,
+    "unread": false
+  },
+  {
+    "id": 4,
+    "sender": "Danish Health Authority",
+    "subject": "Vaccination Appointment Confirmation",
+    "date": "2026-01-08",
+    "content": "Dear Patient,\n\nThis confirms your vaccination appointment:\n\nDate: January 25, 2026\nTime: 14:30\nLocation: Nørrebro Health Center\nAddress: Nørrebrogade 45, 2200 København N\n\nPlease bring your health insurance card and arrive 10 minutes early.\n\nIf you need to reschedule, please contact us at least 24 hours in advance.\n\nBest regards,\nDanish Health Authority",
+    "important": false,
+    "unread": false
+  },
+  {
+    "id": 5,
+    "sender": "Santander Bank",
+    "subject": "Extracto mensual - Diciembre 2025",
+    "date": "2026-01-05",
+    "content": "Estimado cliente,\n\nAdjunto encontrará su extracto bancario correspondiente al mes de diciembre 2025.\n\nResumen:\n- Saldo inicial: 5.420,50 EUR\n- Ingresos totales: 2.800,00 EUR\n- Gastos totales: 3.150,75 EUR\n- Saldo final: 5.069,75 EUR\n\nPara cualquier consulta, no dude en contactarnos.\n\nAtentamente,\nSantander Bank",
+    "important": false,
+    "unread": false
+  },
+  {
+    "id": 6,
+    "sender": "MIT Admissions Office",
+    "subject": "Application Status Update",
+    "date": "2026-01-03",
+    "content": "Dear Applicant,\n\nThank you for your application to the Massachusetts Institute of Technology for Fall 2026.\n\nYour application has been received and is currently under review. We have all required materials:\n✓ Application form\n✓ Transcripts\n✓ Test scores\n✓ Letters of recommendation\n✓ Essays\n\nAdmission decisions will be released on March 14, 2026.\n\nBest of luck,\nMIT Admissions Office",
+    "important": true,
+    "unread": false
+  },
+  {
+    "id": 7,
+    "sender": "MobilePay",
+    "subject": "Du har modtaget penge",
+    "date": "2026-01-16",
+    "content": "Hej,\n\nDu har modtaget 150,00 kr. fra Peter Jensen.\n\nBesked: 'Frokost i fredags 🍕'\n\nSe transaktionen i appen.\n\nVenlig hilsen,\nMobilePay",
+    "important": false,
+    "unread": true
+  },
+  {
+    "id": 8,
+    "sender": "Skatteverket",
+    "subject": "Dags att deklarera",
+    "date": "2026-01-14",
+    "content": "Hej,\n\nNu kan du logga in på Mina sidor och se uppgifter inför din deklaration. \n\nOm du godkänner deklarationen utan ändringar senast den 30 mars kan du få skatteåterbäringen redan i april.\n\nVänliga hälsningar,\nSkatteverket",
+    "important": true,
+    "unread": false
+  },
+  {
+    "id": 9,
+    "sender": "Deutsche Bahn",
+    "subject": "Buchungsbestätigung: Berlin Hbf - München Hbf",
+    "date": "2026-01-15",
+    "content": "Guten Tag,\n\nvielen Dank für Ihre Buchung. Hier sind Ihre Reisedaten:\n\nDatum: 20.01.2026\nAbfahrt: 08:30 Uhr, Gleis 4\nZug: ICE 504\n\nIhr Ticket finden Sie im Anhang als PDF.\n\nWir wünschen Ihnen eine gute Reise.\nDeutsche Bahn AG",
+    "important": false,
+    "unread": true
+  },
+  {
+    "id": 10,
+    "sender": "DigiD",
+    "subject": "Uw DigiD is gebruikt",
+    "date": "2026-01-15",
+    "content": "Geachte heer/mevrouw,\n\nOp 15-01-2026 om 14:30 is uw DigiD gebruikt om in te loggen bij MijnOverheid.\n\nWas u dit niet zelf? Neem dan direct contact op met de DigiD helpdesk.\n\nMet vriendelijke groet,\nHelpdesk DigiD",
+    "important": true,
+    "unread": false
+  },
+  {
+    "id": 11,
+    "sender": "Iberdrola Clientes",
+    "subject": "Tu factura de luz está disponible",
+    "date": "2026-01-12",
+    "content": "Hola,\n\nYa puedes consultar tu factura correspondiente al periodo de facturación de Diciembre 2025.\n\nImporte total: 45,60 €\nFecha de cargo: 20/01/2026\n\nAccede a tu Área Cliente para ver el detalle.\n\nAtentamente,\nEl equipo de Iberdrola",
+    "important": false,
+    "unread": true
+  },
+  {
+    "id": 12,
+    "sender": "Universala Esperanto-Asocio",
+    "subject": "Aliĝo al la Universala Kongreso 2026",
+    "date": "2026-01-10",
+    "content": "Estimata samideano,\n\nNi ĝojas inviti vin al la 111-a Universala Kongreso de Esperanto. La aliĝilo estas nun malfermita en nia retejo.\n\nProfito de la frua aliĝperiodo finiĝas la 28-an de februaro.\n\nAmike,\nVia UEA-teamo",
+    "important": true,
+    "unread": false
+  },
+  {
+    "id": 13,
+    "sender": "Air Greenland",
+    "subject": "Angalanissannut uppernarsaat: Nuuk - Ilulissat",
+    "date": "2026-01-18",
+    "content": "Asasara ilaasussaq,\n\nMatumuuna angalanissat uppernarsarparput.\n\nAngalanissat:\nUlloq: 20. januaari 2026\nAallarfissaq: 14:15\n\nTakussutissiaq ilanngussaq takuuk.\n\nInussiarnersumik inuulluaqqusilluta,\nAir Greenland",
+    "important": false,
+    "unread": true
+  },
+  {
+    "id": 14,
+    "sender": "TAKS",
+    "subject": "Sjálvuppgávan 2025",
+    "date": "2026-01-15",
+    "content": "Góði borgari,\n\nTín sjálvuppgáva fyri 2025 er nú klár.\n\nTú kanst síggja upplýsingarnar og gera broytingar á Borgaraglugganum.\n\nFreistin at lata inn er 1. mai 2026.\n\nVinarliga,\nTAKS",
+    "important": true,
+    "unread": false
+  },
+  {
+    "id": 15,
+    "sender": "EDP Comercial",
+    "subject": "A sua fatura eletrónica - Janeiro 2026",
+    "date": "2026-01-14",
+    "content": "Estimado cliente,\n\nA sua fatura de eletricidade referente a dezembro de 2025 já está disponível.\n\nValor a pagar: 62,40 €\nData limite de pagamento: 28 de janeiro de 2026\nReferência MB: 123 456 789\n\nPode consultar o detalhe na sua área de cliente.\n\nCom os melhores cumprimentos,\nEDP Comercial",
+    "important": false,
+    "unread": true
+  },
+  {
+    "id": 16,
+    "sender": "Absher",
+    "subject": "تذكير: تجديد جواز السفر",
+    "date": "2026-01-12",
+    "content": "عزيزي المواطن،\n\nنود تذكيركم بأن صلاحية جواز السفر الخاص بكم ستنتهي قريبًا.\n\nتاريخ الانتهاء: 15-03-2026\n\nيرجى زيارة منصة أبشر لتجديد الجواز إلكترونيًا لتجنب أي غرامات تأخير.\n\nمع تحيات،\nالمديرية العامة للجوازات",
+    "important": true,
+    "unread": false
+  },
+  {
+    "id": 17,
+    "sender": "State Bank of India",
+    "subject": "Transaction Alert: INR 5,000.00 Debited",
+    "date": "2026-01-16",
+    "content": "Priye Grahak,\n\nApke khaate XX1234 se INR 5,000.00 ka len-den kiya gaya hai via UPI.\n\nShesh rashi: INR 24,500.00\n\nYadi ye len-den aapne nahi kiya hai, to kripya turant bank se sampark karein.\n\nDhanyavaad,\nState Bank of India",
+    "important": false,
+    "unread": true
+  },
+  {
+    "id": 18,
+    "sender": "Gosuslugi",
+    "subject": "Уведомление о штрафе ГИБДД",
+    "date": "2026-01-13",
+    "content": "Уважаемый пользователь,\n\nВам выписан штраф за нарушение правил дорожного движения.\n\nСумма штрафа: 500 ₽\nДата нарушения: 10.01.2026\n\nЕсли вы оплатите штраф в течение 20 дней, действует скидка 50%.\n\nС уважением,\nПортал Госуслуг",
+    "important": true,
+    "unread": false
+  },
+  {
+    "id": 19,
+    "sender": "SF Express",
+    "subject": "【顺丰速运】您的快件正在派送中",
+    "date": "2026-01-17",
+    "content": "尊敬的客户您好，\n\n您的顺丰快件 SF1234567890 正在派送中。\n\n派送员：王师傅\n电话：138-0013-8000\n\n请保持电话畅通，以便及时签收。\n\n感谢您使用顺丰速运。",
+    "important": false,
+    "unread": true
+  },
+  {
+    "id": 20,
+    "sender": "Rakuten Ichiba",
+    "subject": "【楽天市場】注文内容ご確認（自動配信メール）",
+    "date": "2026-01-15",
+    "content": "この度は楽天市場内のショップ「東京エレクトロニクス」をご利用いただき、誠にありがとうございます。\n\n以下の通り、ご注文を受け付けました。\n\n[注文番号] 20260115-00001\n[合計金額] 12,800円\n[お届け予定日] 2026年1月18日\n\n発送が完了しましたら、改めてご連絡いたします。\n\n楽天市場",
+    "important": false,
+    "unread": false
+  }
+]

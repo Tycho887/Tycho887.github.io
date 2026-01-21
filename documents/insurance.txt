@@ -1,0 +1,8 @@
+INSURANCE POLICY - CAR
+Policy Number: DK-998877
+Vehicle: Tesla Model 3
+Coverage: Comprehensive (Kasko)
+Deductible (Selvrisiko): 4.500 DKK
+
+Roadside Assistance: Included (Europe)
+Glass Damage: Included (0 DKK deductible if repaired, 1500 DKK if replaced)

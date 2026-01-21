@@ -1,0 +1,26 @@
+[
+  {
+    "id": 101,
+    "title": "Employment Contract 2026",
+    "sender": "Tech Solutions Inc.",
+    "filename": "contract.txt",
+    "date": "2026-03-01",
+    "type": "doc"
+  },
+  {
+    "id": 102,
+    "title": "Car Insurance Policy",
+    "sender": "Tryg",
+    "filename": "insurance.txt",
+    "date": "2026-01-01",
+    "type": "doc"
+  },
+  {
+    "id": 103,
+    "title": "Meta Terms of Service",
+    "sender": "Meta Legal Department",
+    "filename": "tos.txt",
+    "date": "2026-01-01",
+    "type": "doc"
+  }
+]
