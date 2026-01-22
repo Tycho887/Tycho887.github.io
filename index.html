@@ -519,6 +519,19 @@
         border-color: var(--eboks-blue);
     }
 
+    /* Style for the Read-Only Input */
+    textarea[readonly] {
+        background-color: #f9f9f9; /* Light grey */
+        color: #555;               /* Slightly softer text */
+        cursor: default;           /* Standard arrow cursor */
+        border-color: #e0e0e0;
+    }
+
+    textarea[readonly]:focus {
+        box-shadow: none;          /* No blue glow when clicked */
+        border-color: #e0e0e0;
+    }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -547,29 +560,29 @@
 <div class="main-container">
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="sidebar-item active">
+        <div class="sidebar-item active" onclick="setView('inbox', this)">
             <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
             </svg>
             Inbox
         </div>
-        <div class="sidebar-item" onclick="showNotImplemented()">
+        <div class="sidebar-item" onclick="setView('important', this)">
             <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
             </svg>
             Important
         </div>
-        <div class="sidebar-item" onclick="showNotImplemented()">
+        <div class="sidebar-item" onclick="setView('documents', this)">
             <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
             </svg>
             Documents
         </div>
-        <div class="sidebar-item" onclick="showNotImplemented()">
+        <div class="sidebar-item" onclick="setView('unread', this)">
             <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
             </svg>
-            Categories
+            Categories (Unread)
         </div>
     </div>
 
@@ -602,10 +615,13 @@
             
             <div class="mail-body">
                 <div class="io-group">
-                    <label for="inputText">Incoming Message</label>
-                    <textarea id="inputText" placeholder="Paste your message content here (any language)..."></textarea>
+                    <label for="inputText">Selected Message Context</label>
+                    <textarea 
+                        id="inputText" 
+                        readonly 
+                        placeholder="Select an email from the list above to load its content here..."
+                    ></textarea>
                 </div>
-
                 <div class="io-group">
                     <label for="outputText">
                         Processed Result
@@ -648,12 +664,12 @@
                 </button>
             </div>
                 
-                <button class="primary-btn" onclick="processText('summarize', 'English')">
+                <!-- <button class="primary-btn" onclick="processText('summarize', 'English')">
                     <svg width="16" height="16" style="vertical-align: middle; margin-right: 6px;" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
                     </svg>
                     Summarize
-                </button>
+                </button> -->
             </div>
         </div>
     </div>
@@ -693,101 +709,254 @@
     // Configuration
     const MODEL_NAME = "gemini-2.5-flash-lite";
     
-    let selectedEmailId = null;
-    let emails = []; // Now starts empty
+    // // Format date
+    // function formatDate(dateString) {
+    //     const date = new Date(dateString);
+    //     const today = new Date();
+    //     const yesterday = new Date(today);
+    //     yesterday.setDate(yesterday.getDate() - 1);
+        
+    //     if (date.toDateString() === today.toDateString()) {
+    //         return 'Today';
+    //     } else if (date.toDateString() === yesterday.toDateString()) {
+    //         return 'Yesterday';
+    //     } else {
+    //         return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    //     }
+    // }
 
-    // 1. Fetch emails from JSON file
-    async function fetchEmails() {
+
+    // let selectedEmailId = null;
+    // let emails = []; // Now starts empty
+
+    // // 1. Fetch emails from JSON file
+    // async function fetchEmails() {
+    //     try {
+    //         const response = await fetch('emails.json');
+            
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! status: ${response.status}`);
+    //         }
+            
+    //         emails = await response.json();
+    //         renderEmails(); // Render after data is loaded
+    //     } catch (error) {
+    //         console.error("Could not load emails:", error);
+    //         document.getElementById('emailList').innerHTML = `
+    //             <div style="padding:20px; text-align:center; color:#d32f2f;">
+    //                 <strong>Error loading emails.</strong><br>
+    //                 <small>If you are opening this file directly (file://), try using a local server (like VS Code Live Server) to allow loading the JSON file.</small>
+    //             </div>`;
+    //     }
+    // }
+
+    // // Render email list
+    // function renderEmails() {
+    //     const emailList = document.getElementById('emailList');
+        
+    //     emailList.innerHTML = emails.map(email => {
+    //         const initial = email.sender.charAt(0).toUpperCase();
+    //         const unreadClass = email.unread ? 'unread' : '';
+    //         const selectedClass = email.id === selectedEmailId ? 'selected' : '';
+            
+    //         // Generate a preview from the content if one isn't provided
+    //         // Takes the first 50 characters and removes newlines
+    //         const previewText = email.content.substring(0, 50).replace(/\n/g, ' ') + '...';
+            
+    //         return `
+    //             <div class="email-item ${unreadClass} ${selectedClass}" onclick="selectEmail(${email.id})">
+    //                 <div class="email-icon">${initial}</div>
+    //                 <div class="email-content">
+    //                     <div class="email-header">
+    //                         <div class="email-sender">${email.sender}</div>
+    //                         <div class="email-date">${formatDate(email.date)}</div>
+    //                     </div>
+    //                     <div class="email-subject">${email.subject}</div>
+    //                     <div class="email-preview">${previewText}</div>
+    //                     <div class="email-badges">
+    //                         ${email.important ? '<span class="badge important">Important</span>' : ''}
+    //                         ${email.unread ? '<span class="badge unread">New</span>' : ''}
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         `;
+    //     }).join('');
+    // }
+
+    // // Select an email
+    // function selectEmail(emailId) {
+    //     const email = emails.find(e => e.id === emailId);
+    //     if (!email) return;
+        
+    //     // Mark as read
+    //     email.unread = false;
+    //     selectedEmailId = emailId;
+        
+    //     // Update UI
+    //     renderEmails();
+        
+    //     // Load email content into input field
+    //     document.getElementById('inputText').value = email.content;
+        
+    //     // --- NEW: Clear the previous result and reset the placeholder ---
+    //     document.getElementById('outputText').innerHTML = 'Result will appear here...';
+    //     // ---------------------------------------------------------------
+        
+    //     // Scroll to the tool
+    //     document.querySelector('.mail-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // }
+
+// Global Data State
+    let allData = { emails: [], docs: [] };
+    let currentList = [];
+    let currentView = 'inbox'; // 'inbox', 'important', 'documents', 'unread'
+
+    // 1. Fetch BOTH JSON files at startup
+    async function initData() {
         try {
-            const response = await fetch('emails.json');
+            // Attempt to load both files
+            const [emailRes, docRes] = await Promise.all([
+                fetch('emails.json'),
+                fetch('documents.json')
+            ]);
             
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            if (emailRes.ok) allData.emails = await emailRes.json();
+            if (docRes.ok) allData.docs = await docRes.json();
+
+            // Default view: Inbox
+            setView('inbox', document.querySelector('.sidebar-item.active'));
             
-            emails = await response.json();
-            renderEmails(); // Render after data is loaded
         } catch (error) {
-            console.error("Could not load emails:", error);
-            document.getElementById('emailList').innerHTML = `
-                <div style="padding:20px; text-align:center; color:#d32f2f;">
-                    <strong>Error loading emails.</strong><br>
-                    <small>If you are opening this file directly (file://), try using a local server (like VS Code Live Server) to allow loading the JSON file.</small>
-                </div>`;
+            console.error("Data load error:", error);
+            document.getElementById('emailList').innerHTML = `<div style="padding:20px; color:red">Error loading data. Ensure JSON files exist.</div>`;
         }
     }
 
-    // Render email list
-    function renderEmails() {
-        const emailList = document.getElementById('emailList');
+    // 2. Handle Sidebar Clicks & Filtering
+    function setView(viewName, element) {
+        currentView = viewName;
+
+        // Update active class on sidebar
+        document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+        if(element) element.classList.add('active');
+
+        // Filter Data based on View
+        if (viewName === 'inbox') {
+            currentList = allData.emails;
+        } else if (viewName === 'important') {
+            currentList = allData.emails.filter(e => e.important === true);
+        } else if (viewName === 'documents') {
+            currentList = allData.docs;
+        } else if (viewName === 'unread') {
+            // "Categories" acting as "Unread" filter for this demo
+            currentList = allData.emails.filter(e => e.unread === true);
+        }
+
+        renderList();
+    }
+
+    // 3. Unified Render Function (Handles both Emails and Docs)
+    function renderList() {
+        const listContainer = document.getElementById('emailList');
         
-        emailList.innerHTML = emails.map(email => {
-            const initial = email.sender.charAt(0).toUpperCase();
-            const unreadClass = email.unread ? 'unread' : '';
-            const selectedClass = email.id === selectedEmailId ? 'selected' : '';
+        if (currentList.length === 0) {
+            listContainer.innerHTML = `<div style="padding:20px; text-align:center; color:#999;">No items found in this view.</div>`;
+            return;
+        }
+
+        listContainer.innerHTML = currentList.map(item => {
+            // Determine if it's an email or document based on properties
+            const isDoc = item.type === 'doc' || item.filename;
             
-            // Generate a preview from the content if one isn't provided
-            // Takes the first 50 characters and removes newlines
-            const previewText = email.content.substring(0, 50).replace(/\n/g, ' ') + '...';
+            const id = item.id;
+            const sender = item.sender;
+            const date = formatDate(item.date);
             
+            // Emails use 'subject', Docs use 'title'
+            const title = isDoc ? item.title : item.subject;
+            
+            // Preview: Show content snippet for emails, filename for docs
+            const preview = isDoc ? 
+                `📄 File: ${item.filename}` : 
+                (item.content.substring(0, 50).replace(/\n/g, ' ') + '...');
+
+            const unreadClass = (item.unread && !isDoc) ? 'unread' : '';
+            const initial = sender.charAt(0).toUpperCase();
+
+            // Badges
+            let badgeHtml = '';
+            if (item.important) badgeHtml += '<span class="badge important">Important</span>';
+            if (item.unread) badgeHtml += '<span class="badge unread">New</span>';
+            if (isDoc) badgeHtml += '<span class="badge" style="background:#e3f2fd; color:#0d47a1">DOC</span>';
+
             return `
-                <div class="email-item ${unreadClass} ${selectedClass}" onclick="selectEmail(${email.id})">
+                <div class="email-item ${unreadClass}" onclick="selectItem(${id}, ${isDoc})">
                     <div class="email-icon">${initial}</div>
                     <div class="email-content">
                         <div class="email-header">
-                            <div class="email-sender">${email.sender}</div>
-                            <div class="email-date">${formatDate(email.date)}</div>
+                            <div class="email-sender">${sender}</div>
+                            <div class="email-date">${date}</div>
                         </div>
-                        <div class="email-subject">${email.subject}</div>
-                        <div class="email-preview">${previewText}</div>
-                        <div class="email-badges">
-                            ${email.important ? '<span class="badge important">Important</span>' : ''}
-                            ${email.unread ? '<span class="badge unread">New</span>' : ''}
-                        </div>
+                        <div class="email-subject">${title}</div>
+                        <div class="email-preview">${preview}</div>
+                        <div class="email-badges">${badgeHtml}</div>
                     </div>
                 </div>
             `;
         }).join('');
     }
 
-    // Format date
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        const today = new Date();
-        const yesterday = new Date(today);
-        yesterday.setDate(yesterday.getDate() - 1);
+    // 4. Handle Item Selection (Fetch text for documents)
+    async function selectItem(id, isDoc) {
+        // Reset UI
+        document.querySelectorAll('.email-item').forEach(el => el.classList.remove('selected'));
+        event.currentTarget.classList.add('selected');
         
-        if (date.toDateString() === today.toDateString()) {
-            return 'Today';
-        } else if (date.toDateString() === yesterday.toDateString()) {
-            return 'Yesterday';
-        } else {
-            return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
-        }
-    }
+        const inputField = document.getElementById('inputText');
+        const outputField = document.getElementById('outputText');
+        
+        outputField.innerHTML = 'Result will appear here...'; // Clear previous results
 
-    // Select an email
-    function selectEmail(emailId) {
-        const email = emails.find(e => e.id === emailId);
-        if (!email) return;
+        if (!isDoc) {
+            // --- HANDLE EMAIL ---
+            const email = allData.emails.find(e => e.id === id);
+            // Mark as read locally
+            email.unread = false; 
+            renderList(); // Re-render to remove "bold" unread style
+            
+            inputField.value = email.content;
+        } else {
+            // --- HANDLE DOCUMENT ---
+            const doc = allData.docs.find(d => d.id === id);
+            inputField.value = "Loading document content...";
+            
+            try {
+                // Try to fetch the actual .txt file
+                const response = await fetch('documents/' + doc.filename); // Assumes folder "documents/" exists
+                if (response.ok) {
+                    const text = await response.text();
+                    inputField.value = text;
+                } else {
+                    // Fallback for demo if file is missing
+                    inputField.value = `[System]: Could not load file "${doc.filename}".\n\n(For this demo, ensure a file named "${doc.filename}" exists in a "documents" folder, or simply use the email tab.)`;
+                }
+            } catch (e) {
+                inputField.value = "Error loading document.";
+            }
+        }
         
-        // Mark as read
-        email.unread = false;
-        selectedEmailId = emailId;
-        
-        // Update UI
-        renderEmails();
-        
-        // Load email content into input field
-        document.getElementById('inputText').value = email.content;
-        
-        // --- NEW: Clear the previous result and reset the placeholder ---
-        document.getElementById('outputText').innerHTML = 'Result will appear here...';
-        // ---------------------------------------------------------------
-        
-        // Scroll to the tool
+        // Scroll to tool
         document.querySelector('.mail-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
+    // Helper: Date Formatter
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    }
+
+    // Start
+    window.addEventListener('DOMContentLoaded', initData);
 
     // Initialize: Fetch data instead of just loading
     window.addEventListener('DOMContentLoaded', fetchEmails);
