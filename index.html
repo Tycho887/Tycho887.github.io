@@ -691,13 +691,13 @@
     // --- Gemini API Function ---
     async function processText(action, target) {
         const input = document.getElementById('inputText').value;
-        const apiKey = document.getElementById('apiKey').value;
+        // const apiKey = document.getElementById('apiKey').value;
         const outputField = document.getElementById('outputText');
         const loader = document.getElementById('loader');
 
         // Validation
         if (!input) { alert("Please select an email or enter text first."); return; }
-        if (!apiKey) { alert("Please enter your Gemini API Key."); return; }
+        // if (!apiKey) { alert("Please enter your Gemini API Key."); return; }
 
         // Construct Prompt
         let systemInstructionText = "";
@@ -716,7 +716,7 @@
 
             const workerUrl = "https://gemini-proxy.michaelrj03.workers.dev";
 
-            const response = await fetch(url, {
+            const response = await fetch(workerUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
