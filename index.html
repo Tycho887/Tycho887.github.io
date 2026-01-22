@@ -466,8 +466,11 @@
     }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
+
+<div id="turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAACOJhvPVtoiyS7Ob" data-theme="light"></div>
 
 <!-- Header -->
 <div class="header">
@@ -714,17 +717,32 @@
         try {
             // const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
 
+            const token = turnstile.getResponse(); 
+
+            if (!token) {
+                alert("Security check failed. Please refresh the page.");
+                return;
+            }
+
             const workerUrl = "https://gemini-proxy.michaelrj03.workers.dev";
+
+            // 2. PREPARE DATA
+            const geminiPayload = {
+                system_instruction: { parts: [{ text: systemInstructionText }] },
+                contents: [{ role: "user", parts: [{ text: input }] }],
+                generationConfig: { temperature: 0.3 }
+            };
 
             const response = await fetch(workerUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    system_instruction: { parts: [{ text: systemInstructionText }] },
-                    contents: [{ role: "user", parts: [{ text: input }] }],
-                    generationConfig: { temperature: 0.3 }
+                    cfToken: token,       // The security pass
+                    data: geminiPayload   // The actual request
                 })
             });
+
+            turnstile.reset();
 
             if (!response.ok) {
                 const errorData = await response.json();
@@ -740,8 +758,10 @@
         } catch (error) {
             outputField.innerHTML = `<span style="color:red">Error: ${error.message}</span>`;
             console.error(error);
+            turnstile.reset(); // Always reset on error too
         } finally {
             loader.style.display = "none";
+            turnstile.reset(); // Always reset on error too
         }
     }
 </script>

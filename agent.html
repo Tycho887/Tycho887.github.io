@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>e-Boks Agent</title>
@@ -137,6 +138,8 @@
 </head>
 <body>
 
+<div id="turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAACOJhvPVtoiyS7Ob" data-theme="light"></div>
+
 <div class="header">
     <div class="logo">e-Boks <span style="font-weight:300; opacity:0.8;">| Agent</span></div>
     <div><a href="index.html" class="nav-link">← Back to Inbox</a></div>
@@ -271,6 +274,13 @@
             USER DOCUMENTS:
             ${contextData ? contextData : "No documents selected."}`;
 
+            const token = turnstile.getResponse(); 
+
+            if (!token) {
+                alert("Security check failed. Please refresh the page.");
+                return;
+            }
+
             // const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
 
             // const response = await fetch(url, {
@@ -283,16 +293,27 @@
             // });
 
             const workerUrl = "https://gemini-proxy.michaelrj03.workers.dev"; // Get this from your Worker dashboard
-            
+
+            // 2. PREPARE DATA
+            const geminiPayload = {
+                system_instruction: { parts: [{ text: systemPrompt }] },
+                contents: [{ role: "user", parts: [{ text: text }] }],
+                generationConfig: { temperature: 0.3 }
+            };
+
             const response = await fetch(workerUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    // formatting matched to what the proxy expects
-                    system_instruction: { parts: [{ text: systemPrompt }] },
-                    contents: [{ role: "user", parts: [{ text: text }] }]
+                    cfToken: token,       // The security pass
+                    data: geminiPayload   // The actual request
                 })
             });
+
+            // Reset the token for the next request (important!)
+            turnstile.reset();
+
+            if (!response.ok) throw new Error("Worker Error");
 
             const data = await response.json();
             const rawText = data.candidates[0].content.parts[0].text;
@@ -310,8 +331,10 @@
 
         } catch (err) {
             if(document.getElementById(loadingId)) document.getElementById(loadingId).innerText = "Error: " + err.message;
+            turnstile.reset(); // Always reset on error too
         } finally {
             sendBtn.disabled = false;
+            turnstile.reset(); // Always reset on error too
         }
     }
 
