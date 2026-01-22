@@ -143,9 +143,9 @@
 </div>
 
 <div class="container">
-    <div class="api-overlay">
+    <!-- <div class="api-overlay">
         <input type="password" id="apiKey" placeholder="Gemini API Key" style="border:none; background:transparent; outline:none; width: 120px;">
-    </div>
+    </div> -->
 
     <div class="sidebar">
         <div class="sidebar-header">
@@ -247,11 +247,11 @@
     async function sendMessage() {
         const inputField = document.getElementById('userPrompt');
         const text = inputField.value.trim();
-        const apiKey = document.getElementById('apiKey').value;
+        // const apiKey = document.getElementById('apiKey').value;
         const sendBtn = document.getElementById('sendBtn');
 
         if (!text) return;
-        if (!apiKey) { alert("Please enter API Key top right"); return; }
+        // if (!apiKey) { alert("Please enter API Key top right"); return; }
 
         appendMessage('user', text);
         inputField.value = '';
@@ -271,11 +271,24 @@
             USER DOCUMENTS:
             ${contextData ? contextData : "No documents selected."}`;
 
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
-            const response = await fetch(url, {
+            // const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
+
+            // const response = await fetch(url, {
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify({
+            //         system_instruction: { parts: [{ text: systemPrompt }] },
+            //         contents: [{ role: "user", parts: [{ text: text }] }]
+            //     })
+            // });
+
+            const workerUrl = "https://gemini-proxy.michaelrj03.workers.dev"; // Get this from your Worker dashboard
+            
+            const response = await fetch(workerUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
+                    // formatting matched to what the proxy expects
                     system_instruction: { parts: [{ text: systemPrompt }] },
                     contents: [{ role: "user", parts: [{ text: text }] }]
                 })
