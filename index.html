@@ -464,6 +464,33 @@
         font-weight: 700; 
         margin: 10px 0 5px 0; 
     }
+
+    /* Toast Notification Styles */
+    .toast-notification {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background-color: #323232; /* Dark grey */
+        color: white;
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        pointer-events: none; /* Allows clicking through it while invisible */
+    }
+
+    .toast-notification.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -471,6 +498,7 @@
 <body>
 
 <div id="turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAACOJhvPVtoiyS7Ob" data-theme="light"></div>
+<div id="demoToast" class="toast-notification">Feature not implemented in demo</div>
 
 <!-- Header -->
 <div class="header">
@@ -481,9 +509,9 @@
     <div class="nav-bar">
         <button class="nav-item active">Digital Post</button>
         <button class="nav-item" onclick="window.location.href='agent.html'">Agent</button>        
-        <button class="nav-item">Archive</button>
-        <button class="nav-item">Sent</button>
-        <button class="nav-item">Settings</button>
+        <button class="nav-item" onclick="showNotImplemented()">Archive</button>
+        <button class="nav-item" onclick="showNotImplemented()">Sent</button>
+        <button class="nav-item" onclick="showNotImplemented()">Settings</button>
     </div>
 </div>
 
@@ -497,19 +525,19 @@
             </svg>
             Inbox
         </div>
-        <div class="sidebar-item">
+        <div class="sidebar-item" onclick="showNotImplemented()">
             <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
             </svg>
             Important
         </div>
-        <div class="sidebar-item">
+        <div class="sidebar-item" onclick="showNotImplemented()">
             <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
             </svg>
             Documents
         </div>
-        <div class="sidebar-item">
+        <div class="sidebar-item" onclick="showNotImplemented()">
             <svg class="sidebar-icon" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
             </svg>
@@ -538,10 +566,10 @@
         <div class="mail-container">
             <div class="mail-header">
                 <div class="mail-title">Processing Configuration</div>
-                <!-- <div class="api-settings">
-                    <label for="apiKey">API Key:</label>
-                    <input type="password" id="apiKey" class="api-input" placeholder="Enter your API key">
-                </div> -->
+                <div class="api-settings">
+                    <label for="demoCode">Demo Password:</label>
+                    <input type="password" id="demoCode" class="api-input" placeholder="Enter password">
+                </div>
             </div>
             
             <div class="mail-body">
@@ -593,6 +621,28 @@
 </div>
 
 <script>
+
+    let toastTimeout;
+
+    function showNotImplemented() {
+        const toast = document.getElementById('demoToast');
+        
+        // Reset animation if clicked rapidly
+        toast.classList.remove('show');
+        clearTimeout(toastTimeout);
+        
+        // Trigger reflow to restart animation
+        void toast.offsetWidth;
+        
+        // Show toast
+        toast.classList.add('show');
+        
+        // Hide after 3 seconds
+        toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 1000);
+    }
+
     // Configuration
     const MODEL_NAME = "gemini-2.5-flash-lite";
     
@@ -702,6 +752,9 @@
         if (!input) { alert("Please select an email or enter text first."); return; }
         // if (!apiKey) { alert("Please enter your Gemini API Key."); return; }
 
+        const demoCode = document.getElementById('demoCode').value; // Get the password
+        if (!demoCode) { alert("Please enter the Demo Password."); loader.style.display = "none"; return; }
+
         // Construct Prompt
         let systemInstructionText = "";
         if (action === 'translate') {
@@ -738,6 +791,7 @@
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     cfToken: token,       // The security pass
+                    demoCode: demoCode,
                     data: geminiPayload   // The actual request
                 })
             });

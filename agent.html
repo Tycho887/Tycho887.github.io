@@ -134,11 +134,39 @@
         button.send-btn { background: var(--eboks-blue); color: white; border: none; border-radius: 6px; width: 50px; height: 50px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         button.send-btn:hover { background: #b71c1c; }
         button.send-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+        /* Toast Notification Styles */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background-color: #323232; /* Dark grey */
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none; /* Allows clicking through it while invisible */
+        }
+
+        .toast-notification.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
     </style>
 </head>
 <body>
 
 <div id="turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAACOJhvPVtoiyS7Ob" data-theme="light"></div>
+<div id="demoToast" class="toast-notification">Feature not implemented in demo</div>
 
 <div class="header">
     <div class="logo">e-Boks <span style="font-weight:300; opacity:0.8;">| Agent</span></div>
@@ -149,6 +177,10 @@
     <!-- <div class="api-overlay">
         <input type="password" id="apiKey" placeholder="Gemini API Key" style="border:none; background:transparent; outline:none; width: 120px;">
     </div> -->
+
+    <div class="api-overlay">
+        <input type="password" id="demoCode" placeholder="Demo Password" style="border:1px solid #ccc; background:white; padding: 5px; border-radius: 4px;">
+    </div>
 
     <div class="sidebar">
         <div class="sidebar-header">
@@ -175,6 +207,28 @@
 </div>
 
 <script>
+
+    let toastTimeout;
+
+    function showNotImplemented() {
+        const toast = document.getElementById('demoToast');
+        
+        // Reset animation if clicked rapidly
+        toast.classList.remove('show');
+        clearTimeout(toastTimeout);
+        
+        // Trigger reflow to restart animation
+        void toast.offsetWidth;
+        
+        // Show toast
+        toast.classList.add('show');
+        
+        // Hide after 3 seconds
+        toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
     const MODEL_NAME = "gemini-2.5-flash";
     let appData = { emails: [], docs: [] };
 
@@ -253,6 +307,9 @@
         // const apiKey = document.getElementById('apiKey').value;
         const sendBtn = document.getElementById('sendBtn');
 
+        const demoCode = document.getElementById('demoCode').value;
+        if (!demoCode) { alert("Please enter the Demo Password top right."); return; }
+
         if (!text) return;
         // if (!apiKey) { alert("Please enter API Key top right"); return; }
 
@@ -306,6 +363,7 @@
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     cfToken: token,       // The security pass
+                    demoCode: demoCode, 
                     data: geminiPayload   // The actual request
                 })
             });
