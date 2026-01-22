@@ -491,6 +491,34 @@
         transform: translateX(-50%) translateY(0);
     }
 
+    /* Language Selector Styling */
+    .language-select {
+        padding: 10px 30px 10px 12px; /* Extra right padding for arrow */
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        font-size: 14px;
+        color: var(--text);
+        background-color: white;
+        cursor: pointer;
+        font-family: inherit;
+        appearance: none; /* Removes default browser styling */
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px top 50%;
+        background-size: 10px auto;
+        min-width: 140px;
+        transition: all 0.2s;
+    }
+
+    .language-select:hover {
+        border-color: #999;
+    }
+
+    .language-select:focus {
+        outline: none;
+        border-color: var(--eboks-blue);
+    }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -590,24 +618,35 @@
             </div>
 
             <div class="action-bar">
-                <button onclick="processText('translate', 'English')">
+                <select id="targetLanguage" class="language-select">
+                    <option value="English">🇬🇧 English</option>
+                    <option value="Danish">🇩🇰 Danish</option>
+                    <option value="German">🇩🇪 German</option>
+                    <option value="French">🇫🇷 French</option>
+                    <option value="Spanish">🇪🇸 Spanish</option>
+                    <option value="Italian">🇮🇹 Italian</option>
+                    <option value="Swedish">🇸🇪 Swedish</option>
+                    <option value="Norwegian">🇳🇴 Norwegian</option>
+                    <option value="Polish">🇵🇱 Polish</option>
+                    <option value="Ukrainian">🇺🇦 Ukrainian</option>
+                    <option value="Arabic">🇸🇦 Arabic</option>
+                    <option value="Turkish">🇹🇷 Turkish</option>
+                </select>
+
+                <button onclick="runActionWithLanguage('translate')">
                     <svg width="16" height="16" style="vertical-align: middle; margin-right: 6px;" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
                     </svg>
-                    English
+                    Translate
                 </button>
-                <button onclick="processText('translate', 'German')">
+                
+                <button class="primary-btn" onclick="runActionWithLanguage('summarize')">
                     <svg width="16" height="16" style="vertical-align: middle; margin-right: 6px;" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+                        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
                     </svg>
-                    German
+                    Summarize
                 </button>
-                <button onclick="processText('translate', 'Danish')">
-                    <svg width="16" height="16" style="vertical-align: middle; margin-right: 6px;" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
-                    </svg>
-                    Danish
-                </button>
+            </div>
                 
                 <button class="primary-btn" onclick="processText('summarize', 'English')">
                     <svg width="16" height="16" style="vertical-align: middle; margin-right: 6px;" viewBox="0 0 24 24" fill="currentColor">
@@ -641,6 +680,14 @@
         toastTimeout = setTimeout(() => {
             toast.classList.remove('show');
         }, 1000);
+    }
+
+    function runActionWithLanguage(actionType) {
+        // 1. Get the value from the dropdown
+        const selectedLang = document.getElementById('targetLanguage').value;
+        
+        // 2. Pass it to your existing function
+        processText(actionType, selectedLang);
     }
 
     // Configuration
@@ -733,6 +780,10 @@
         
         // Load email content into input field
         document.getElementById('inputText').value = email.content;
+        
+        // --- NEW: Clear the previous result and reset the placeholder ---
+        document.getElementById('outputText').innerHTML = 'Result will appear here...';
+        // ---------------------------------------------------------------
         
         // Scroll to the tool
         document.querySelector('.mail-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
