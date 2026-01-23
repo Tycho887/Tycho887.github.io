@@ -161,6 +161,26 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* Add inside your <style> tag */
+        .small-action-btn {
+            background: transparent;
+            border: 1px solid var(--eboks-blue);
+            color: var(--eboks-blue);
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .small-action-btn:hover {
+            background: var(--eboks-blue);
+            color: white;
+        }
+
     </style>
 </head>
 <body>
@@ -183,8 +203,12 @@
     </div>
 
     <div class="sidebar">
+
         <div class="sidebar-header">
-            <div class="sidebar-title">Context Library</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <div class="sidebar-title" style="margin-bottom: 0;">Context Library</div>
+                <button id="selectAllBtn" class="small-action-btn" onclick="toggleAllFiles()">Select All</button>
+            </div>
             <div class="sidebar-subtitle">Select items to analyze.</div>
         </div>
         <div class="document-list" id="documentList"></div>
@@ -227,6 +251,30 @@
         toastTimeout = setTimeout(() => {
             toast.classList.remove('show');
         }, 3000);
+    }
+
+    function toggleAllFiles() {
+        const checkboxes = document.querySelectorAll('.doc-checkbox');
+        const btn = document.getElementById('selectAllBtn');
+        
+        // Check if currently all are checked to determine action
+        const allAreChecked = Array.from(checkboxes).every(cb => cb.checked);
+        const targetState = !allAreChecked; // If all are checked, target is false (deselect). Otherwise true.
+
+        checkboxes.forEach(cb => {
+            cb.checked = targetState;
+            const parentDiv = cb.closest('.doc-item');
+            
+            // Update visual highlighting
+            if (targetState) {
+                parentDiv.classList.add('selected');
+            } else {
+                parentDiv.classList.remove('selected');
+            }
+        });
+
+        // Update Button Text
+        btn.innerText = targetState ? "Deselect All" : "Select All";
     }
 
     const MODEL_NAME = "gemini-2.5-flash";
@@ -277,6 +325,13 @@
         const checkbox = document.getElementById(`chk-${uniqueId}`);
         if (event.target !== checkbox) checkbox.checked = !checkbox.checked;
         if(checkbox.checked) div.classList.add('selected'); else div.classList.remove('selected');
+
+        // --- ADD THIS TO UPDATE BUTTON STATE MANUALLY ---
+        const allCheckboxes = document.querySelectorAll('.doc-checkbox');
+        const btn = document.getElementById('selectAllBtn');
+        const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
+        if(btn) btn.innerText = allChecked ? "Deselect All" : "Select All";
+
     }
 
     async function getSelectedContext() {
